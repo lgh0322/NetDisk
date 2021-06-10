@@ -3,14 +3,12 @@ package com.vaca.netdisk
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val RequestSinglePhoto = 2
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 val selectedImage = data.data
                 val filePath: String =MainApplication. fileUtils.getPath(selectedImage)
                 dataScope.launch {
-                    NetCmd.ga(File(filePath))
+                    NetCmd.uploadFile(File(filePath))
                 }
 
             }catch (e:java.lang.Exception){

@@ -2,19 +2,15 @@ package com.vaca.netdisk
 
 import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.security.MessageDigest
 import java.util.*
-import kotlin.collections.HashMap
 
 
 object NetCmd {
@@ -131,26 +127,29 @@ object NetCmd {
 
 
     @Throws(IOException::class)
-    fun ga(file: File): String? {
+    fun uploadFile(file: File): String? {
         val url = netAddress + "/info"
 
 
-        val requestBody: RequestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
+
+        val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             .addFormDataPart(
                 "uploadFile", file.name,
                 file.asRequestBody(JSON2)
             )
             .addFormDataPart("some-field", "some-value")
-            .build()
 
 
+
+        val exMultipartBody = ExMultipartBody(builder.build(), object : UploadProgressListener {
+            override fun onProgress(len: Long, current: Int) {
+                Log.e("fuck","$len    sdklfkljsdf       $current")
+            }
+        })
 
         val request: Request = Request.Builder()
             .addHeader("Content-Type", "application/json; charset=UTF-8")
-            .addHeader("appid", appId)
-            .addHeader("token", token)
-            .addHeader("nonce", nonce)
-            .url(url).post(requestBody)
+            .url(url).post(exMultipartBody)
             .build()
         client.newCall(request)
             .execute()
