@@ -130,6 +130,36 @@ object NetCmd {
 
 
 
+    @Throws(IOException::class)
+    fun ga(file: File): String? {
+        val url = netAddress + "/info"
+
+
+        val requestBody: RequestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
+            .addFormDataPart(
+                "uploadFile", file.name,
+                file.asRequestBody(JSON2)
+            )
+            .addFormDataPart("some-field", "some-value")
+            .build()
+
+
+
+        val request: Request = Request.Builder()
+            .addHeader("Content-Type", "application/json; charset=UTF-8")
+            .addHeader("appid", appId)
+            .addHeader("token", token)
+            .addHeader("nonce", nonce)
+            .url(url).post(requestBody)
+            .build()
+        client.newCall(request)
+            .execute()
+            .use { response ->
+                response.body?.string()?.let { Log.e("sdf", it);return it }
+            }
+        return null
+    }
+
 
 
 }
