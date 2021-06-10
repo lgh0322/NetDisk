@@ -21,16 +21,7 @@ class MainActivity : AppCompatActivity() {
         PathUtil.initVar(this)
 
 
-//        File(PathUtil.getPathX("fuck.txt")).writeBytes(byteArrayOf(0x61,0x62,0x63))
-//
-//
-//        dataScope.launch {
-//            try {
-//                NetCmd.ga(File(PathUtil.getPathX("fuck.txt")))
-//            }catch (e:Exception){
-//
-//            }
-//        }
+
     }
 
     fun upload(view: View) {
