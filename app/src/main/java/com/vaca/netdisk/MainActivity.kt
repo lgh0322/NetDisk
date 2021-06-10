@@ -1,21 +1,15 @@
 package com.vaca.netdisk
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 import java.io.File
-import java.lang.Exception
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -29,18 +23,14 @@ class MainActivity : AppCompatActivity() {
 
 //        File(PathUtil.getPathX("fuck.txt")).writeBytes(byteArrayOf(0x61,0x62,0x63))
 //
-
-
-
-
-        dataScope.launch {
-            try {
-                NetCmd.ga(File(PathUtil.getPathX("fuck.txt")))
-            }catch (e:Exception){
-
-            }
-
-        }
+//
+//        dataScope.launch {
+//            try {
+//                NetCmd.ga(File(PathUtil.getPathX("fuck.txt")))
+//            }catch (e:Exception){
+//
+//            }
+//        }
     }
 
     fun upload(view: View) {
@@ -51,6 +41,23 @@ class MainActivity : AppCompatActivity() {
             ), RequestSinglePhoto
         )
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RequestSinglePhoto && resultCode == RESULT_OK && null != data) {
+            try {
+                val selectedImage = data.data
+                val filePath: String =MainApplication. fileUtils.getPath(selectedImage)
+                dataScope.launch {
+                    NetCmd.ga(File(filePath))
+                }
+
+            }catch (e:java.lang.Exception){
+
+            }
+        }
     }
 
 
