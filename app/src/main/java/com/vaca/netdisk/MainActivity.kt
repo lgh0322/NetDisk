@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -29,12 +30,7 @@ class MainActivity : AppCompatActivity() {
 //        File(PathUtil.getPathX("fuck.txt")).writeBytes(byteArrayOf(0x61,0x62,0x63))
 //
 
-        startActivityForResult(
-            Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            ), RequestSinglePhoto
-        )
+
 
 
         dataScope.launch {
@@ -45,6 +41,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    fun upload(view: View) {
+        startActivityForResult(
+            Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            ), RequestSinglePhoto
+        )
+
     }
 
 
