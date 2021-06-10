@@ -104,10 +104,11 @@ object NetCmd {
 
     //-------------------------------------------------------------------------------删除血压数据接口
     @Throws(IOException::class)
-    fun deletePC100Data(id: String): String? {
-        val url = netAddress + "/napi/v1/bp/data/del"
+    fun wa(): String? {
+        val url = netAddress + "/login"
         val bodyTree = TreeMap<String, String>().apply {
-            this["id"] = id
+            this["user"]="fuck"
+            this["password"]="wer"
         }
 
         val body: RequestBody = Gson().toJson(bodyTree).toRequestBody(JSON)
