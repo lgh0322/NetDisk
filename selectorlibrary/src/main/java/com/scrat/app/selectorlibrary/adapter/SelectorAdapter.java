@@ -29,7 +29,7 @@ import java.util.Set;
 
 public class SelectorAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
-    public static List<ISelectImageItem> mData;
+    private List<ISelectImageItem> mData;
     private OnItemClickListener mListener;
 
     public SelectorAdapter(@NonNull OnItemClickListener listener) {

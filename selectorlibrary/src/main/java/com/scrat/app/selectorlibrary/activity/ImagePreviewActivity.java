@@ -34,6 +34,8 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+
 /**
  * Created by yixuanxuan on 16/10/13.
  */
@@ -47,6 +49,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
     public static void show(Activity activity, int requestCode, ArrayList<String> paths) {
         Intent i = new Intent(activity, ImagePreviewActivity.class);
+        i.setFlags( FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.putStringArrayListExtra(EXTRA_PATHS, paths);
         activity.startActivityForResult(i, requestCode);
     }

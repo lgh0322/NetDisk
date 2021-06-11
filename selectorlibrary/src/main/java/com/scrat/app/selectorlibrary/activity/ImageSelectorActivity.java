@@ -34,6 +34,8 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by yixuanxuan on 16/10/12.
  */
@@ -91,37 +93,26 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
 
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Log.e("dada","考了多少分"+mAdapter.getItemCount());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
-
-            }
-        }.start();
-    }
-
-
-
-    private void initView() {
-
-    }
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                mSelectSortPosList.add(1);
+//                Log.e("但是立刻解放","撒旦克里夫"+mSelectSortPosList.size());
+//                refreshFinishBtn();
+//                mPreviewTv.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//    }
 
     private SelectorAdapter.OnItemClickListener onItemClickListener = new SelectorAdapter.OnItemClickListener() {
         @Override
