@@ -3,6 +3,8 @@ package com.vaca.netdisk.activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
@@ -10,6 +12,7 @@ import com.vaca.netdisk.MainApplication
 import com.vaca.netdisk.R
 import com.vaca.netdisk.databinding.ActivityMainBinding
 import com.vaca.netdisk.net.NetCmd
+import com.vaca.netdisk.pop.UploadPop
 import com.vaca.netdisk.utils.PathUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         // Setup refresh listener which triggers new data loading
 
         swipeContainer.setOnRefreshListener {
-
+            Log.e("fuck","fuck")
         }
 
         // Configure the refreshing colors
@@ -59,14 +62,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun upload(view: View) {
-        val swipeContainer = binding.fuck
-        swipeContainer.setRefreshing(false)
-//        startActivityForResult(
-//            Intent(
-//                Intent.ACTION_PICK,
-//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-//            ), RequestSinglePhoto
-//        )
+//        val swipeContainer = binding.fuck
+//        swipeContainer.setRefreshing(false)
+        startActivityForResult(
+            Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            ), RequestSinglePhoto
+        )
 
     }
 
@@ -77,9 +80,25 @@ class MainActivity : AppCompatActivity() {
             try {
                 val selectedImage = data.data
                 val filePath: String = MainApplication.fileUtils.getPath(selectedImage)
-                dataScope.launch {
-                    NetCmd.uploadFile(File(filePath))
-                }
+
+
+
+                val uploadPop=UploadPop(this,object:UploadPop.ReceiveInfo{
+                    override fun receive(s: Boolean) {
+
+                    }
+
+                },filePath)
+                uploadPop.showAtLocation(binding.root,Gravity.CENTER,0,0)
+
+
+
+
+//                val selectedImage = data.data
+//                val filePath: String = MainApplication.fileUtils.getPath(selectedImage)
+//                dataScope.launch {
+//                    NetCmd.uploadFile(File(filePath))
+//                }
 
             }catch (e:java.lang.Exception){
 
