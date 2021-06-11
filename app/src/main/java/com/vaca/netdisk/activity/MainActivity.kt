@@ -2,15 +2,13 @@ package com.vaca.netdisk.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-
+import com.scrat.app.selectorlibrary.ImageSelector
 import com.vaca.netdisk.MainApplication
-import com.vaca.netdisk.R
 import com.vaca.netdisk.databinding.ActivityMainBinding
 import com.vaca.netdisk.net.NetCmd
 import com.vaca.netdisk.net.UploadProgressListener
@@ -20,12 +18,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
-import java.lang.Thread.sleep
 
 
 class MainActivity : AppCompatActivity() {
 
-
+    private val REQUEST_CODE_SELECT_IMG = 91
+    private val MAX_SELECT_COUNT = 20
     val uploadFuck=MutableLiveData<Int>()
 
     lateinit var binding: ActivityMainBinding
@@ -69,14 +67,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     fun upload(view: View) {
 //        val swipeContainer = binding.fuck
 //        swipeContainer.setRefreshing(false)
-        startActivityForResult(
-            Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            ), RequestSinglePhoto
+//        startActivityForResult(
+//            Intent(
+//                Intent.ACTION_PICK,
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+//            ), RequestSinglePhoto
+//        )
+
+        ImageSelector.show(
+            this,
+            REQUEST_CODE_SELECT_IMG,
+            MAX_SELECT_COUNT
         )
 
     }
