@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import com.scrat.app.selectorlibrary.ImageSelector
-import com.vaca.netdisk.MainApplication
 import com.vaca.netdisk.databinding.ActivityMainBinding
 import com.vaca.netdisk.net.NetCmd
 import com.vaca.netdisk.net.UploadProgressListener
@@ -90,22 +89,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RequestSinglePhoto && resultCode == RESULT_OK && null != data) {
+        if (requestCode == REQUEST_CODE_SELECT_IMG) {
             try {
-                val selectedImage = data.data
-                val filePath: String = MainApplication.fileUtils.getPath(selectedImage)
+                val paths = ImageSelector.getImagePaths(data) ?: return
+                if (paths.isEmpty()) return
 
-
+                val filePath=paths[0]
 
                 uploadPop=UploadPop(this,object:UploadPop.ReceiveInfo{
                     override fun receive(s: Boolean) {
                         dataScope.launch {
-                            NetCmd.uploadFile(File(filePath),object:UploadProgressListener{
-                                override fun onProgress(len: Long, current: Int) {
-                                    uploadFuck.postValue((current.toDouble()/len.toDouble()*100).toInt())
-                                }
 
-                            })
+                            try {
+                                NetCmd.uploadFile(File(filePath),object:UploadProgressListener{
+                                    override fun onProgress(len: Long, current: Int) {
+                                        uploadFuck.postValue((current.toDouble()/len.toDouble()*100).toInt())
+                                    }
+
+                                })
+                            }catch (e:Exception){
+
+                            }
+
+
+
                         }
                     }
 
