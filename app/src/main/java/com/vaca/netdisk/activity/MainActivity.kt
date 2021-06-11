@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 
 import com.vaca.netdisk.MainApplication
 import com.vaca.netdisk.R
 import com.vaca.netdisk.databinding.ActivityMainBinding
 import com.vaca.netdisk.net.NetCmd
+import com.vaca.netdisk.net.UploadProgressListener
 import com.vaca.netdisk.pop.UploadPop
 import com.vaca.netdisk.utils.PathUtil
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +25,11 @@ import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
 
+    val uploadFuck=MutableLiveData<Int>()
+
+    lateinit var binding: ActivityMainBinding
+    var uploadPop:UploadPop?=null
     private val RequestSinglePhoto = 2
     val dataScope = CoroutineScope(Dispatchers.IO)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         PathUtil.initVar(this)
 
+        uploadFuck.observe(this,{
+            uploadPop?.step2(it)
+        })
 
 
 
@@ -83,22 +91,27 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                val uploadPop=UploadPop(this,object:UploadPop.ReceiveInfo{
+                uploadPop=UploadPop(this,object:UploadPop.ReceiveInfo{
                     override fun receive(s: Boolean) {
+                        dataScope.launch {
+                            NetCmd.uploadFile(File(filePath),object:UploadProgressListener{
+                                override fun onProgress(len: Long, current: Int) {
+                                    uploadFuck.postValue((current.toDouble()/len.toDouble()*100).toInt())
+                                }
 
+                            })
+                        }
                     }
 
                 },filePath)
-                uploadPop.showAtLocation(binding.root,Gravity.CENTER,0,0)
+                uploadPop?.showAtLocation(binding.root,Gravity.CENTER,0,0)
 
 
 
 
 //                val selectedImage = data.data
 //                val filePath: String = MainApplication.fileUtils.getPath(selectedImage)
-//                dataScope.launch {
-//                    NetCmd.uploadFile(File(filePath))
-//                }
+
 
             }catch (e:java.lang.Exception){
 

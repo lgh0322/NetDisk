@@ -128,7 +128,7 @@ object NetCmd {
 
 
     @Throws(IOException::class)
-    fun uploadFile(file: File): String? {
+    fun uploadFile(file: File,pro:UploadProgressListener): String? {
         val url = netAddress + "/info"
 
 
@@ -142,13 +142,7 @@ object NetCmd {
 
 
 
-        val exMultipartBody = ExMultipartBody(
-            builder.build(),
-            object : UploadProgressListener {
-                override fun onProgress(len: Long, current: Int) {
-                    Log.e("fuck", "$len    sdklfkljsdf       $current")
-                }
-            })
+        val exMultipartBody = ExMultipartBody(builder.build(),pro)
 
         val request: Request = Request.Builder()
             .addHeader("Content-Type", "application/json; charset=UTF-8")
