@@ -101,14 +101,14 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
 //            @Override
 //            public void run() {
 //                try {
-//                    sleep(1000);
+//                    sleep(100);
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
-//                mSelectSortPosList.add(1);
-//                Log.e("但是立刻解放","撒旦克里夫"+mSelectSortPosList.size());
+////                mSelectSortPosList.add(1);
+////                Log.e("但是立刻解放","撒旦克里夫"+mSelectSortPosList.size());
 //                refreshFinishBtn();
-//                mPreviewTv.setVisibility(View.VISIBLE);
+////                mPreviewTv.setVisibility(View.VISIBLE);
 //            }
 //        });
 //
@@ -126,6 +126,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
                 }
                 mSelectSortPosList.add(pos);
             }
+            Log.e("但是","大飒飒");
             refreshFinishBtn();
             return mSelectSortPosList.size();
         }
@@ -140,6 +141,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
             mFinishTv.setTextColor(white);
             mPreviewTv.setVisibility(View.VISIBLE);
         } else {
+            Log.e("但是","大师傅立刻就");
             int darkerGray = ContextCompat.getColor(this, android.R.color.darker_gray);
             mFinishTv.setTextColor(darkerGray);
             mPreviewTv.setVisibility(View.GONE);
@@ -232,7 +234,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        resetSelector();
+//        resetSelector();
         if (data == null || data.getCount() == 0)
             return;
 
