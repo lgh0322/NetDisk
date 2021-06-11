@@ -86,7 +86,7 @@ public class ImageSelectorActivity extends AppCompatActivity implements LoaderMa
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
-        mMaxImgCount = 30;
+        mMaxImgCount = getIntent().getIntExtra(EXTRA_KEY_MAX, 0);
         initData();
 
         Log.e("士大夫","圣诞快乐JFK记录");

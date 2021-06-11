@@ -49,7 +49,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
     public static void show(Activity activity, int requestCode, ArrayList<String> paths) {
         Intent i = new Intent(activity, ImagePreviewActivity.class);
-        i.setFlags( FLAG_ACTIVITY_REORDER_TO_FRONT);
         i.putStringArrayListExtra(EXTRA_PATHS, paths);
         activity.startActivityForResult(i, requestCode);
     }
