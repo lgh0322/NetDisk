@@ -56,28 +56,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     fun upload(view: View) {
-        startActivityForResult(
-            Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            ), RequestSinglePhoto
-        )
+        val swipeContainer = binding.fuck
+        swipeContainer.setRefreshing(false)
+//        startActivityForResult(
+//            Intent(
+//                Intent.ACTION_PICK,
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+//            ), RequestSinglePhoto
+//        )
 
     }
 
