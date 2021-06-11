@@ -1,4 +1,4 @@
-package com.vaca.netdisk;
+package com.vaca.netdisk.utils;
 
 import android.content.Context;
 

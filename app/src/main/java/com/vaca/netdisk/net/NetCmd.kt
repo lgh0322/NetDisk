@@ -1,7 +1,8 @@
-package com.vaca.netdisk
+package com.vaca.netdisk.net
 
 import android.util.Log
 import com.google.gson.Gson
+import com.vaca.netdisk.utils.PathUtil
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -141,11 +142,13 @@ object NetCmd {
 
 
 
-        val exMultipartBody = ExMultipartBody(builder.build(), object : UploadProgressListener {
-            override fun onProgress(len: Long, current: Int) {
-                Log.e("fuck","$len    sdklfkljsdf       $current")
-            }
-        })
+        val exMultipartBody = ExMultipartBody(
+            builder.build(),
+            object : UploadProgressListener {
+                override fun onProgress(len: Long, current: Int) {
+                    Log.e("fuck", "$len    sdklfkljsdf       $current")
+                }
+            })
 
         val request: Request = Request.Builder()
             .addHeader("Content-Type", "application/json; charset=UTF-8")

@@ -1,0 +1,68 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="statusbar_view_height">0dp</dimen>
+    <dimen name="wr_control_text_size">16sp</dimen>
+    <dimen name="preview_text_margin">10dp</dimen>
+    <dimen name="public_margin_txt">20dp</dimen>
+    <dimen name="white_rec_bg">25dp</dimen>
+    <dimen name="margin_avatar_end">5dp</dimen>
+    <dimen name="public_margin_horizontal">10dp</dimen>
+    <dimen name="privacy_padding">25dp</dimen>
+
+    <dimen name="bpm_measuring_data_height">150dp</dimen>
+    <dimen name="bpm_measuring_data">60sp</dimen>
+    <dimen name="bpm_measuring_data_unit">20sp</dimen>
+
+
+    <!-- textSize -->
+    <dimen name="textSize30">30sp</dimen>
+    <dimen name="textSizeLarger">20sp</dimen>
+    <dimen name="textSizeLarge">18sp</dimen>
+    <dimen name="textSize17">17sp</dimen>
+    <dimen name="textSizeNormal">16sp</dimen>
+    <dimen name="textSizeSmall">14sp</dimen>
+    <dimen name="textSizeSmaller">12sp</dimen>
+    <dimen name="text_size_tiny">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_big">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_larger">28sp</dimen>
+    <dimen name="text_size_30">30sp</dimen>
+    <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_36">36sp</dimen>
+    <dimen name="text_size_48">48sp</dimen>
+    <dimen name="text_size_supper_large">50sp</dimen>
+    <dimen name="text_size_60">60sp</dimen>
+    <dimen name="text_size_64">64sp</dimen>
+
+    <!-- bpView -->
+    <dimen name="bp_text_size">10sp</dimen>
+    <dimen name="canvas_w">380dp</dimen>
+    <dimen name="canvas_h">255dp</dimen>
+    <dimen name="rect_left">50dp</dimen>
+    <dimen name="rect_right">50dp</dimen>
+    <dimen name="rect_top">20dp</dimen>
+    <dimen name="rect_btm">215dp</dimen>
+    <dimen name="blue_rect_w">65dp</dimen>
+    <dimen name="blue_rect_h">30dp</dimen>
+    <dimen name="green_rect_w">140dp</dimen>
+    <dimen name="green_rect_h">75dp</dimen>
+    <dimen name="yellow_rect_w1">157dp</dimen>
+    <dimen name="yellow_rect_h1">95dp</dimen>
+    <dimen name="yellow_rect_w">175dp</dimen>
+    <dimen name="yellow_rect_h">105dp</dimen>
+    <dimen name="orange_rect_w">210dp</dimen>
+    <dimen name="orange_rect_h">135dp</dimen>
+    <dimen name="red_rect_w">245dp</dimen>
+    <dimen name="red_rect_h">165dp</dimen>
+    <dimen name="dark_red_rect_w">280dp</dimen>
+    <dimen name="dark_red_rect_h">195dp</dimen>
+    <dimen name="margin">5dp</dimen>
+    <dimen name="margin_btm">15dp</dimen>
+    <dimen name="circle_radio">3dp</dimen>
+    <dimen name="main_bottom_bar_height">83dp</dimen>
+</resources>
