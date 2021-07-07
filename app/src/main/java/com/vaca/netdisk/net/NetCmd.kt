@@ -50,7 +50,7 @@ object NetCmd {
     }
 
 
-    fun getAppUpdateFile(url: String, fileName: String, listener: OnDownloadListener?) {
+    fun getFile(url: String, fileName: String, listener: OnDownloadListener?) {
         val absoluteFilePath: String = PathUtil.getPathX(fileName)
         val file = File(absoluteFilePath)
         val request: Request = Request.Builder().url(url).build()
@@ -99,30 +99,6 @@ object NetCmd {
 
 
 
-    //-------------------------------------------------------------------------------删除血压数据接口
-    @Throws(IOException::class)
-    fun wa(): String? {
-        val url = netAddress + "/login"
-        val bodyTree = TreeMap<String, String>().apply {
-            this["user"]="fuck"
-            this["password"]="wer"
-        }
-
-        val body: RequestBody = Gson().toJson(bodyTree).toRequestBody(JSON)
-        val request: Request = Request.Builder()
-            .addHeader("Content-Type", "application/json; charset=UTF-8")
-            .addHeader("appid", appId)
-            .addHeader("token", token)
-            .addHeader("nonce", nonce)
-            .url(url).post(body)
-            .build()
-        client.newCall(request)
-            .execute()
-            .use { response ->
-                response.body?.string()?.let { Log.e("sdf", it);return it }
-            }
-        return null
-    }
 
 
 

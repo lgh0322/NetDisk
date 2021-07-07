@@ -19,9 +19,21 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
+
+
+
+
+
+
+
+
+
+
+
 
     private val REQUEST_CODE_SELECT_IMG = 91
     private val MAX_SELECT_COUNT = 20
@@ -31,6 +43,14 @@ class MainActivity : AppCompatActivity() {
     var uploadPop:UploadPop?=null
     private val RequestSinglePhoto = 2
     val dataScope = CoroutineScope(Dispatchers.IO)
+
+
+
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -43,6 +63,26 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        dataScope.launch {
+            NetCmd.getFile("http://192.168.6.103:3000/","fuck.png",object:NetCmd.OnDownloadListener{
+                override fun onDownloadStart() {
+
+                }
+
+                override fun onDownloadSuccess(filePath: String?) {
+                  Log.e("fuck","fuckfuck")
+                }
+
+                override fun onDownloading(progress: Int) {
+
+                }
+
+                override fun onDownloadFailed() {
+
+                }
+
+            })
+        }
 
 
 
