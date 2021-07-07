@@ -23,7 +23,7 @@ object NetCmd {
     private const val nonce: String = "345"
     private const val secret: String = "VMRwHMDM--19ZaCNXNWVOxqI"
     var token: String = ""
-    val netAddress: String = "http://35.201.145.221:3000"
+    val netAddress: String = "http://192.168.6.103:3000"
 
 
     interface OnDownloadListener {

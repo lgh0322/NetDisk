@@ -1,2 +1,2 @@
 rootProject.name = "NetDisk"
-include ':app',":selectorlibrary"
+include ':app'
