@@ -23,29 +23,12 @@ object NetCmd {
     private const val nonce: String = "345"
     private const val secret: String = "VMRwHMDM--19ZaCNXNWVOxqI"
     var token: String = ""
-    val netAddress: String = "http://192.168.5.101:3000"
+    val netAddress: String = "http://192.168.5.101:3001"
 
 
     interface OnDownloadListener {
-        /**
-         * 开始下载
-         */
-        fun onDownloadStart()
-
-        /**
-         * 下载成功
-         * @param filePath 文件下载的路径
-         */
         fun onDownloadSuccess(filePath: String?)
-
-        /**
-         * @param progress 下载进度
-         */
         fun onDownloading(progress: Int)
-
-        /**
-         * 下载失败
-         */
         fun onDownloadFailed()
     }
 
@@ -54,12 +37,10 @@ object NetCmd {
         val absoluteFilePath: String = PathUtil.getPathX(fileName)
         val file = File(absoluteFilePath)
         val request: Request = Request.Builder().url(url).build()
-        listener?.onDownloadStart()
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: Call, e: java.io.IOException) {
                 listener?.onDownloadFailed()
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (200 == response.code) {
                     var fileOutputStream: FileOutputStream? = null
@@ -105,17 +86,13 @@ object NetCmd {
 
     @Throws(IOException::class)
     fun uploadFile(file: File,pro:UploadProgressListener): String? {
-        val url = netAddress + "/info"
-
-
+        val url = netAddress + "/upload"
 
         val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
             .addFormDataPart(
                 "uploadFile", file.name,
                 file.asRequestBody(JSON2)
             )
-            .addFormDataPart("some-field", "some-value")
-
 
 
         val exMultipartBody = ExMultipartBody(builder.build(),pro)
