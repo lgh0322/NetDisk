@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
 
         dataScope.launch {
-            NetCmd.getFile("http://192.168.5.101:3001/","fuck.png",object:NetCmd.OnDownloadListener{
+            NetCmd.getFile("http://192.168.5.101:3001/download","fuck.png",object:NetCmd.OnDownloadListener{
                 override fun onDownloadSuccess(filePath: String?) {
                   Log.e("fuck","fuckfuck")
                 }

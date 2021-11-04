@@ -36,13 +36,18 @@ object NetCmd {
     fun getFile(url: String, fileName: String, listener: OnDownloadListener?) {
         val absoluteFilePath: String = PathUtil.getPathX(fileName)
         val file = File(absoluteFilePath)
-        val request: Request = Request.Builder().url(url).build()
+        val request: Request = Request.Builder()
+            .addHeader("gaga","gaga2")
+            .url(url).build()
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: Call, e: java.io.IOException) {
                 listener?.onDownloadFailed()
             }
             override fun onResponse(call: Call, response: Response) {
                 if (200 == response.code) {
+
+                    Log.e("sdf",response.body!!.string())
+
                     var fileOutputStream: FileOutputStream? = null
                     var inputStream: InputStream? = null
                     try {
