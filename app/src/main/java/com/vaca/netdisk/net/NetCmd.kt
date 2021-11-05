@@ -23,7 +23,7 @@ object NetCmd {
     private const val nonce: String = "345"
     private const val secret: String = "VMRwHMDM--19ZaCNXNWVOxqI"
     var token: String = ""
-    val netAddress: String = "http://192.168.5.101:3001"
+    val netAddress: String = "http://139.9.206.3:3001"
 
 
     interface OnDownloadListener {
@@ -33,11 +33,12 @@ object NetCmd {
     }
 
 
-    fun getFile(url: String, fileName: String, listener: OnDownloadListener?) {
+    fun getFile( fileName: String, listener: OnDownloadListener?) {
+        val url: String= netAddress+"/download"
         val absoluteFilePath: String = PathUtil.getPathX(fileName)
         val file = File(absoluteFilePath)
         val request: Request = Request.Builder()
-            .addHeader("gaga","gaga2")
+            .addHeader("name",fileName)
             .url(url).build()
         client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: Call, e: java.io.IOException) {
@@ -46,7 +47,6 @@ object NetCmd {
             override fun onResponse(call: Call, response: Response) {
                 if (200 == response.code) {
 
-                    Log.e("sdf",response.body!!.string())
 
                     var fileOutputStream: FileOutputStream? = null
                     var inputStream: InputStream? = null
