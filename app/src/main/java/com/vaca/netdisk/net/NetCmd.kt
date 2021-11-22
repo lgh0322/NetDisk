@@ -104,25 +104,29 @@ object NetCmd {
 
 
     @Throws(IOException::class)
-    fun uploadFile(file: File,pro:UploadProgressListener): String? {
-        val url = netAddress + "/info"
+    fun uploadFile(): String? {
+        val url = "https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyD1nsDTghDkS21v5IU0RDTmKYq4mEB9FK8"
 
+        val bodyx="{\n" +
+                "  \"input\":{\n" +
+                "    \"text\":\"Android is a mobile operating system developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets.\"\n" +
+                "  },\n" +
+                "  \"voice\":{\n" +
+                "    \"languageCode\":\"en-gb\",\n" +
+                "    \"name\":\"en-GB-Standard-A\",\n" +
+                "    \"ssmlGender\":\"FEMALE\"\n" +
+                "  },\n" +
+                "  \"audioConfig\":{\n" +
+                "    \"audioEncoding\":\"MP3\"\n" +
+                "  }\n" +
+                "}"
 
+        val body2=bodyx.toRequestBody(JSON)
 
-        val builder: MultipartBody.Builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-            .addFormDataPart(
-                "uploadFile", file.name,
-                file.asRequestBody(JSON2)
-            )
-            .addFormDataPart("some-field", "some-value")
-
-
-
-        val exMultipartBody = ExMultipartBody(builder.build(),pro)
 
         val request: Request = Request.Builder()
             .addHeader("Content-Type", "application/json; charset=UTF-8")
-            .url(url).post(exMultipartBody)
+            .url(url).post(body2)
             .build()
         client.newCall(request)
             .execute()

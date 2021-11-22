@@ -2,6 +2,9 @@ package com.vaca.netdisk.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.media.AsyncPlayer
+import android.media.AudioManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -18,8 +21,10 @@ import com.vaca.netdisk.utils.PathUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.io.File
 import java.io.IOException
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+    var asyncPlayer = AsyncPlayer(null)
 
 
 
@@ -61,6 +66,23 @@ class MainActivity : AppCompatActivity() {
             uploadPop?.step2(it)
         })
 
+        val decoder = Base64.getDecoder()
+        dataScope.launch {
+
+            try {
+                val gg=NetCmd.uploadFile()!!
+                val ggx=JSONObject(gg)
+                val audioContent=ggx.getString("audioContent")
+                val fuck=decoder.decode(audioContent)
+                File(PathUtil.getPathX("fuck.mp3")).writeBytes(fuck)
+                asyncPlayer.play(this@MainActivity, Uri.fromFile(File(PathUtil.getPathX("fuck.mp3"))),false, AudioManager.STREAM_MUSIC)
+            }catch (e:Exception){
+
+            }
+
+
+
+        }
 
 
         dataScope.launch {
@@ -124,49 +146,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RequestSinglePhoto   && resultCode == Activity.RESULT_OK && null != data) {
-            try {
-                val selectedImage = data.data
-                val filePath: String = fileUtils.getPath(selectedImage)
-
-                uploadPop=UploadPop(this,object:UploadPop.ReceiveInfo{
-                    override fun receive(s: Boolean) {
-                        dataScope.launch {
-
-                            try {
-                                NetCmd.uploadFile(File(filePath),object:UploadProgressListener{
-                                    override fun onProgress(len: Long, current: Int) {
-                                        uploadFuck.postValue((current.toDouble()/len.toDouble()*100).toInt())
-                                    }
-
-                                })
-                            }catch (e:Exception){
-
-                            }
-
-
-
-                        }
-                    }
-
-                },filePath)
-                uploadPop?.showAtLocation(binding.root,Gravity.CENTER,0,0)
-
-
-
-
-//                val selectedImage = data.data
-//                val filePath: String = MainApplication.fileUtils.getPath(selectedImage)
-
-
-            }catch (e:java.lang.Exception){
-
-            }
-        }
-    }
 
 
 }
