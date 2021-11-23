@@ -139,7 +139,7 @@ object NetCmd {
 
 
     @Throws(IOException::class)
-    fun uploadFile3(): String? {
+    fun uploadFile3(s:String): String? {
        // val url = "http://65.49.212.218:9000/echoPost2"
         val url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyD1nsDTghDkS21v5IU0RDTmKYq4mEB9FK8"
 
@@ -147,10 +147,10 @@ object NetCmd {
         var fuck=JSONObject()
         var fuck2=JSONArray()
         fuck2.put("come here")
-        fuck.put("source","en")
-        fuck.put("target","zh")
+        fuck.put("source","zh")
+        fuck.put("target","en")
         fuck.put("format","text")
-        fuck.put("q","come here")
+        fuck.put("q",s)
         val bo=fuck.toString()
 
 
