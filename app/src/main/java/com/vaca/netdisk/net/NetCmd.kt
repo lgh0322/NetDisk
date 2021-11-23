@@ -102,10 +102,9 @@ object NetCmd {
 
 
 
-
     @Throws(IOException::class)
-    fun uploadFile(): String? {
-        val url = "https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyD1nsDTghDkS21v5IU0RDTmKYq4mEB9FK8"
+    fun uploadFile2(): String? {
+        val url = "http://192.168.5.101:9000/echoPost"
 
         val bodyx="{\n" +
                 "  \"input\":{\n" +

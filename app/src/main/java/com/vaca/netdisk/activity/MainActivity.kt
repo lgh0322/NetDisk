@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         dataScope.launch {
 
             try {
-                val gg=NetCmd.uploadFile()!!
+                val gg=NetCmd.uploadFile2()!!
                 val ggx=JSONObject(gg)
                 val audioContent=ggx.getString("audioContent")
                 val fuck=decoder.decode(audioContent)
@@ -82,28 +82,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        }
-
-
-        dataScope.launch {
-            NetCmd.getFile("http://192.168.6.103:3000/","fuck.png",object:NetCmd.OnDownloadListener{
-                override fun onDownloadStart() {
-
-                }
-
-                override fun onDownloadSuccess(filePath: String?) {
-                  Log.e("fuck","fuckfuck")
-                }
-
-                override fun onDownloading(progress: Int) {
-
-                }
-
-                override fun onDownloadFailed() {
-
-                }
-
-            })
         }
 
 
