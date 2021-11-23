@@ -104,11 +104,11 @@ object NetCmd {
 
     @Throws(IOException::class)
     fun uploadFile2(): String? {
-        val url = "http://192.168.5.101:9000/echoPost"
+        val url = "http://65.49.212.218:9000/echoPost"
 
         val bodyx="{\n" +
                 "  \"input\":{\n" +
-                "    \"text\":\"Android is a mobile operating system developed by Google, based on the Linux kernel and designed primarily for touchscreen mobile devices such as smartphones and tablets.\"\n" +
+                "    \"text\":\"hello helicopter.\"\n" +
                 "  },\n" +
                 "  \"voice\":{\n" +
                 "    \"languageCode\":\"en-gb\",\n" +
