@@ -7,6 +7,8 @@ import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -121,6 +123,38 @@ object NetCmd {
                 "}"
 
         val body2=bodyx.toRequestBody(JSON)
+
+
+        val request: Request = Request.Builder()
+            .addHeader("Content-Type", "application/json; charset=UTF-8")
+            .url(url).post(body2)
+            .build()
+        client.newCall(request)
+            .execute()
+            .use { response ->
+                response.body?.string()?.let { Log.e("sdf", it);return it }
+            }
+        return null
+    }
+
+
+    @Throws(IOException::class)
+    fun uploadFile3(): String? {
+       // val url = "http://65.49.212.218:9000/echoPost2"
+        val url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyD1nsDTghDkS21v5IU0RDTmKYq4mEB9FK8"
+
+
+        var fuck=JSONObject()
+        var fuck2=JSONArray()
+        fuck2.put("come here")
+        fuck.put("source","en")
+        fuck.put("target","zh")
+        fuck.put("format","text")
+        fuck.put("q","come here")
+        val bo=fuck.toString()
+
+
+        val body2=bo.toRequestBody(JSON)
 
 
         val request: Request = Request.Builder()

@@ -70,15 +70,15 @@ class MainActivity : AppCompatActivity() {
         dataScope.launch {
 
             try {
-                val gg=NetCmd.uploadFile2()!!
-                val ggx=JSONObject(gg)
-                val audioContent=ggx.getString("audioContent")
-                val fuck=decoder.decode(audioContent)
-
-                val tempMp3 = File.createTempFile("kurchina", "mp3", cacheDir)
-                tempMp3.writeBytes(fuck)
-
-                asyncPlayer.play(this@MainActivity, Uri.fromFile(tempMp3),false, AudioManager.STREAM_MUSIC)
+                val gg=NetCmd.uploadFile3()!!
+//                val ggx=JSONObject(gg)
+//                val audioContent=ggx.getString("audioContent")
+//                val fuck=decoder.decode(audioContent)
+//
+//                val tempMp3 = File.createTempFile("kurchina", "mp3", cacheDir)
+//                tempMp3.writeBytes(fuck)
+//
+//                asyncPlayer.play(this@MainActivity, Uri.fromFile(tempMp3),false, AudioManager.STREAM_MUSIC)
             }catch (e:Exception){
 
             }
