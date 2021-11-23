@@ -74,8 +74,11 @@ class MainActivity : AppCompatActivity() {
                 val ggx=JSONObject(gg)
                 val audioContent=ggx.getString("audioContent")
                 val fuck=decoder.decode(audioContent)
-                File(PathUtil.getPathX("fuck.mp3")).writeBytes(fuck)
-                asyncPlayer.play(this@MainActivity, Uri.fromFile(File(PathUtil.getPathX("fuck.mp3"))),false, AudioManager.STREAM_MUSIC)
+
+                val tempMp3 = File.createTempFile("kurchina", "mp3", cacheDir)
+                tempMp3.writeBytes(fuck)
+
+                asyncPlayer.play(this@MainActivity, Uri.fromFile(tempMp3),false, AudioManager.STREAM_MUSIC)
             }catch (e:Exception){
 
             }
